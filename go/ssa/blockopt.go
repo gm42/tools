@@ -46,7 +46,7 @@ func deleteUnreachableBlocks(f *Function) {
 		if b.Index == white {
 			for _, c := range b.Succs {
 				if c.Index == black {
-					c.removePred(b) // delete white->black edge
+					c.RemovePred(b) // delete white->black edge
 				}
 			}
 			if debugBlockOpt {
@@ -88,7 +88,7 @@ func jumpThreading(f *Function, b *BasicBlock) bool {
 			jump.setBlock(a)
 			a.Instrs[len(a.Instrs)-1] = jump
 			a.Succs = a.Succs[:1]
-			c.removePred(b)
+			c.RemovePred(b)
 		} else {
 			if j == 0 {
 				c.replacePred(b, a)
@@ -147,11 +147,11 @@ func fuseBlocks(f *Function, a *BasicBlock) bool {
 	return true
 }
 
-// optimizeBlocks() performs some simple block optimizations on a
+// OptimizeBlocks() performs some simple block optimizations on a
 // completed function: dead block elimination, block fusion, jump
 // threading.
 //
-func optimizeBlocks(f *Function) {
+func OptimizeBlocks(f *Function) {
 	deleteUnreachableBlocks(f)
 
 	// Loop until no further progress.

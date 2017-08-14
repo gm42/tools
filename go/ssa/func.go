@@ -92,11 +92,11 @@ func (b *BasicBlock) replaceSucc(p, q *BasicBlock) {
 	}
 }
 
-// removePred removes all occurrences of p in b's
+// RemovePred removes all occurrences of p in b's
 // predecessor list and φ-nodes.
 // Ordinarily there should be at most one.
 //
-func (b *BasicBlock) removePred(p *BasicBlock) {
+func (b *BasicBlock) RemovePred(p *BasicBlock) {
 	phis := b.phis()
 
 	// We must preserve edge order for φ-nodes.
@@ -320,7 +320,7 @@ func (f *Function) finishBody() {
 	}
 	f.Locals = f.Locals[:j]
 
-	optimizeBlocks(f)
+	OptimizeBlocks(f)
 
 	buildReferrers(f)
 
@@ -345,7 +345,7 @@ func (f *Function) finishBody() {
 
 	flattenPhis(f)
 	cullSigmas(f)
-	optimizeBlocks(f)
+	OptimizeBlocks(f)
 
 	if f.Prog.mode&SanityCheckFunctions != 0 {
 		mustSanityCheck(f, nil)

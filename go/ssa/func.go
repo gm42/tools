@@ -383,7 +383,7 @@ func flattenPhis(fn *Function) {
 				newInstrs = append(newInstrs, ins)
 				continue
 			}
-			ReplaceAll(phi, phi.Edges[0])
+			replaceAll(phi, phi.Edges[0])
 		}
 		block.Instrs = newInstrs
 	}
